@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@bomb.sh/tab':
+        specifier: ^0.0.15
+        version: 0.0.15(cac@6.7.14)
       '@drizzle-team/brocli':
         specifier: ^0.12.0
         version: 0.12.0
@@ -125,6 +128,21 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@bomb.sh/tab@0.0.15':
+    resolution: {integrity: sha512-Y90ub44TAvbdO9P8mcD/XPyQjFhiR5xmd4Fk7JErmWmEWEUimNnjWiBrVZ16Tj3GA1rLZ+uvCN2V/pzLawv31g==}
+    hasBin: true
+    peerDependencies:
+      cac: ^6.7.14
+      citty: ^0.1.6 || ^0.2.0
+      commander: ^13.1.0
+    peerDependenciesMeta:
+      cac:
+        optional: true
+      citty:
+        optional: true
+      commander:
+        optional: true
 
   '@changesets/apply-release-plan@7.1.1':
     resolution: {integrity: sha512-9qPCm/rLx/xoOFXIHGB229+4GOL76S4MC+7tyOuTsR6+1jYlfFDQORdvwR5hDA6y4FL2BPt3qpbcQIS+dW85LA==}
@@ -1538,6 +1556,10 @@ snapshots:
 
   '@biomejs/cli-win32-x64@2.4.16':
     optional: true
+
+  '@bomb.sh/tab@0.0.15(cac@6.7.14)':
+    optionalDependencies:
+      cac: 6.7.14
 
   '@changesets/apply-release-plan@7.1.1':
     dependencies:

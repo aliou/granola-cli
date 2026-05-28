@@ -2,6 +2,7 @@
 
 import { boolean, run } from "@drizzle-team/brocli";
 import { commands } from "./cli/commands/index.js";
+import { handleCompletion } from "./cli/completion.js";
 import { APP_NAME, VERSION } from "./constants.js";
 import { handleCliError, setGlobalOptionsGetter } from "./errors.js";
 
@@ -43,11 +44,18 @@ export function getGlobalOptions(): GlobalOptions {
 async function main(): Promise<void> {
   setGlobalOptionsGetter(() => activeGlobals);
 
+  const argv = normalizeArgv(process.argv);
+
+  if (handleCompletion(argv)) {
+    return;
+  }
+
   await run(commands, {
     name: APP_NAME,
     description: "CLI for Granola meeting notes",
     version: VERSION,
     globals: globalOptions,
+    argSource: argv,
     omitKeysOfUndefinedOptions: true,
     hook: (event, _command, globals) => {
       if (event === "before") {
@@ -66,3 +74,11 @@ async function main(): Promise<void> {
 main().catch((error: unknown) => {
   handleCliError(error, activeGlobals);
 });
+
+function normalizeArgv(argv: string[]): string[] {
+  if (argv[2] !== "--") {
+    return argv;
+  }
+
+  return [argv[0] ?? "node", argv[1] ?? "granola", ...argv.slice(3)];
+}
