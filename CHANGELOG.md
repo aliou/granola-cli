@@ -1,5 +1,11 @@
 # granola-cli
 
+## 0.2.1
+
+### Patch Changes
+
+- 1c294cb: Add x86_64 Linux release binaries and expose the CLI through the flake packages.
+
 ## 0.2.0
 
 ### Minor Changes
