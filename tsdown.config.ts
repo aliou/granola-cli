@@ -24,6 +24,7 @@ export default defineConfig([
       targets: [
         { platform: "darwin", arch: "arm64", nodeVersion: "26.0.0" },
         { platform: "linux", arch: "arm64", nodeVersion: "26.0.0" },
+        { platform: "linux", arch: "x64", nodeVersion: "26.0.0" },
       ],
       seaConfig: {
         disableExperimentalSEAWarning: true,

@@ -25,6 +25,10 @@
           url = "https://github.com/aliou/granola-cli/releases/download/v${version}/granola-linux-arm64";
           hash = "sha256-a3lrPweGdysFhj8MOij3XWdfuf4CurCJjqd18DkJo2w="; # linux-arm64
         };
+        "x86_64-linux" = {
+          url = "https://github.com/aliou/granola-cli/releases/download/v${version}/granola-linux-x64";
+          hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # linux-x64
+        };
       };
 
       # Build from source for development
@@ -92,12 +96,12 @@
             description = "CLI for Granola meeting notes";
             homepage = "https://github.com/aliou/granola-cli";
             license = licenses.mit;
-            platforms = [ "aarch64-darwin" "aarch64-linux" ];
+            platforms = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ];
             mainProgram = "granola";
           };
         };
     in
-    flake-utils.lib.eachSystem [ "aarch64-darwin" "aarch64-linux" ] (system:
+    flake-utils.lib.eachSystem [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ] (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         granola-cli = buildFromSource pkgs;

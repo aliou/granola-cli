@@ -23,13 +23,16 @@ nix develop --command pnpm build
 echo "Computing hashes..."
 DARWIN_ARM_HASH=$(nix hash file --sri dist/granola-darwin-arm64)
 LINUX_ARM_HASH=$(nix hash file --sri dist/granola-linux-arm64)
+LINUX_X64_HASH=$(nix hash file --sri dist/granola-linux-x64)
 echo "Darwin ARM64 hash: ${DARWIN_ARM_HASH}"
 echo "Linux ARM64 hash: ${LINUX_ARM_HASH}"
+echo "Linux x64 hash: ${LINUX_X64_HASH}"
 
 # Update flake.nix
 sed -i "s|version = \"[^\"]*\";|version = \"${VERSION}\";|" flake.nix
 sed -i "s|hash = \"sha256-[^\"]*\"; # darwin|hash = \"${DARWIN_ARM_HASH}\"; # darwin|" flake.nix
 sed -i "s|hash = \"sha256-[^\"]*\"; # linux-arm64|hash = \"${LINUX_ARM_HASH}\"; # linux-arm64|" flake.nix
+sed -i "s|hash = \"sha256-[^\"]*\"; # linux-x64|hash = \"${LINUX_X64_HASH}\"; # linux-x64|" flake.nix
 echo "Updated flake.nix"
 
 # Update src/constants.ts version
