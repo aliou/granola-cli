@@ -27,7 +27,7 @@
         };
         "x86_64-linux" = {
           url = "https://github.com/aliou/granola-cli/releases/download/v${version}/granola-linux-x64";
-          hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # linux-x64
+          hash = "sha256-Z/Z6O8u8jfSTEThgPHMFH7kd5rce+kc8ILnLd5aQNJI="; # linux-x64
         };
       };
 
