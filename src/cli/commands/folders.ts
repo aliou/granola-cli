@@ -12,9 +12,11 @@ const foldersListCommand = command({
   desc: "List folders",
   options: {
     cursor: string().desc("Pagination cursor"),
-    "page-size": number("page-size").desc(
-      "Results per page (1-30, default 10)",
-    ),
+    "page-size": number("page-size")
+      .desc("Results per page (1-30, default 10)")
+      .min(1)
+      .max(30)
+      .default(10),
   },
   handler: async (opts) => {
     const options = getGlobalOptions();
@@ -36,10 +38,8 @@ const foldersListCommand = command({
       writeHuman(`${folder.id}  ${folder.name}${parent}`, options);
     }
 
-    if (result.hasMore && result.cursor) {
-      writeHuman(`-- has more (cursor: ${result.cursor})`, {
-        quiet: options.quiet,
-      });
+    if (result.hasMore) {
+      writeHuman("-- has more", { quiet: options.quiet });
     }
   },
 });

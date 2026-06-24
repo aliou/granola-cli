@@ -5,6 +5,7 @@ import {
   positional,
   string,
 } from "@drizzle-team/brocli";
+import { GranolaCliError } from "../../errors.js";
 import { getGlobalOptions } from "../../main.js";
 import { writeHuman, writeJson } from "../../output.js";
 import { resolveClient } from "../context.js";
@@ -30,18 +31,28 @@ const notesListCommand = command({
       "Filter notes in this folder (and children)",
     ),
     cursor: string().desc("Pagination cursor"),
-    "page-size": number("page-size").desc(
-      "Results per page (1-30, default 10)",
-    ),
+    "page-size": number("page-size")
+      .desc("Results per page (1-30, default 10)")
+      .min(1)
+      .max(30)
+      .default(10),
   },
   handler: async (opts) => {
+    const folderId = opts["folder-id"];
+    if (folderId && !/^fol_[a-zA-Z0-9]{14}$/.test(folderId)) {
+      throw new GranolaCliError(
+        "INVALID_FOLDER_ID",
+        `Invalid folder ID: ${folderId}. Expected format: fol_xxxxxxxxxxxxxx`,
+      );
+    }
+
     const options = getGlobalOptions();
     const client = await resolveClient();
     const result = await client.listNotes({
       created_before: opts["created-before"],
       created_after: opts["created-after"],
       updated_after: opts["updated-after"],
-      folder_id: opts["folder-id"],
+      folder_id: folderId,
       cursor: opts.cursor,
       page_size: opts["page-size"],
     });
@@ -57,10 +68,8 @@ const notesListCommand = command({
       writeHuman(`${note.id}  ${created}  ${title}`, options);
     }
 
-    if (result.hasMore && result.cursor) {
-      writeHuman(`-- has more (cursor: ${result.cursor})`, {
-        quiet: options.quiet,
-      });
+    if (result.hasMore) {
+      writeHuman("-- has more", { quiet: options.quiet });
     }
   },
 });
@@ -77,6 +86,13 @@ const notesGetCommand = command({
     transcript: boolean().desc("Include transcript in output").default(false),
   },
   handler: async (opts) => {
+    if (!/^not_[a-zA-Z0-9]{14}$/.test(opts.id)) {
+      throw new GranolaCliError(
+        "INVALID_NOTE_ID",
+        `Invalid note ID: ${opts.id}. Expected format: not_xxxxxxxxxxxxxx`,
+      );
+    }
+
     const options = getGlobalOptions();
     const client = await resolveClient();
     const include = opts.transcript ? ("transcript" as const) : undefined;
