@@ -1,5 +1,11 @@
 # granola-cli
 
+## 0.2.2
+
+### Patch Changes
+
+- 95158b1: Add pre-validation for API arguments and limits, and remove cursor value from human-readable pagination output.
+
 ## 0.2.1
 
 ### Patch Changes
