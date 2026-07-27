@@ -49,6 +49,9 @@ export interface NoteSummary {
 export interface Speaker {
   source: "microphone" | "speaker";
   diarization_label?: string;
+  /** Resolved display name of the identified speaker, e.g. "Alice Smith".
+   * Only present when Granola could identify the speaker. */
+  name?: string;
 }
 
 export interface TranscriptItem {

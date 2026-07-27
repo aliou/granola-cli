@@ -155,7 +155,10 @@ const notesGetCommand = command({
       writeHuman("", options);
       writeHuman("Transcript:", options);
       for (const item of note.transcript) {
-        const label = item.speaker.diarization_label ?? item.speaker.source;
+        const label =
+          item.speaker.name ??
+          item.speaker.diarization_label ??
+          item.speaker.source;
         writeHuman(`  [${label}] ${item.text}`, options);
       }
     }
