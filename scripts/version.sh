@@ -35,9 +35,8 @@ sed -i "s|hash = \"sha256-[^\"]*\"; # linux-arm64|hash = \"${LINUX_ARM_HASH}\"; 
 sed -i "s|hash = \"sha256-[^\"]*\"; # linux-x64|hash = \"${LINUX_X64_HASH}\"; # linux-x64|" flake.nix
 echo "Updated flake.nix"
 
-# Update src/constants.ts version
-sed -i "s|export const VERSION = \"[^\"]*\";|export const VERSION = \"${VERSION}\";|" src/constants.ts
-echo "Updated src/constants.ts"
+# Version is read from package.json at build time (see src/constants.ts),
+# so no source patching is needed here.
 
 # Clean up dist (don't commit binaries)
 rm -rf dist
