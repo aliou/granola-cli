@@ -12,7 +12,7 @@
 
   outputs = { self, nixpkgs, flake-utils, git-hooks }:
     let
-      version = "0.1.0";
+      version = "0.2.4";
 
       # Binary hashes for releases - update these after each release
       # Run: nix hash file --sri <binary>
