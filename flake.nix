@@ -19,15 +19,15 @@
       binaries = {
         "aarch64-darwin" = {
           url = "https://github.com/aliou/granola-cli/releases/download/v${version}/granola-darwin-arm64";
-          hash = "sha256-C25niV4BQ47CycTH80ysaRd2IyC1iBtAP89N1TVAHQA="; # darwin
+          hash = "sha256-zBjFzy3v4pNuPDt/+YCpNU5/DGwHum0k+6yvfozupDQ="; # darwin
         };
         "aarch64-linux" = {
           url = "https://github.com/aliou/granola-cli/releases/download/v${version}/granola-linux-arm64";
-          hash = "sha256-0/FTsSesU53kBPpCqN9xmS6KLiA/B2kiI2VMkV2RgME="; # linux-arm64
+          hash = "sha256-6MfgHZipNCgZdG7sfn/kj6fQth1s493O94H+Uv7Y/kE="; # linux-arm64
         };
         "x86_64-linux" = {
           url = "https://github.com/aliou/granola-cli/releases/download/v${version}/granola-linux-x64";
-          hash = "sha256-WsxjFmYuMi05S/nws50ez++nTg/AcnKAxTRLuExf0hI="; # linux-x64
+          hash = "sha256-j9XHDOaHD5IdvSw0S6pTimpIII74l3W98UZw0FI5TnM="; # linux-x64
         };
       };
 
